@@ -1,0 +1,10 @@
+[flake8]
+max-line-length = 79 
+exclude = 
+    .venv,
+    migrations,
+    __pycache__,
+    db.sqlite3
+
+ignore =
+    E501  
