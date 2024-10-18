@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from .models import Tarefa
 
-# Create your views here.
+
+def listar_tarefa(request):
+    tarefas = Tarefa.objects.all()
+
+    return render(request, 'tarefa/home.html', {'tarefas': tarefas})
