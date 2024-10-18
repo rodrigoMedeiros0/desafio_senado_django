@@ -26,6 +26,11 @@
     
     {% include 'componentes/navbar.html' %}
 
+    {% if messages %}
+      {% include 'componentes/alerta.html' %}
+    {% endif %}
+
+
 
     <div class="container d-flex flex-column mt-5" style="max-width: 1200px">
       {% block content %}{% endblock %}

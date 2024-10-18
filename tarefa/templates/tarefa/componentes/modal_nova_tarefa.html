@@ -1,0 +1,147 @@
+<div
+  class="modal fade"
+  id="modalNovaTarefa"
+  tabindex="-1"
+  aria-labelledby="modalNovaTarefaLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalNovaTarefaLabel">
+          <i class="fas fa-tasks me-2 text-custom"></i> Nova Tarefa
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form
+          method="POST"
+          action="{% url 'salvar_tarefa' %}"
+          id="formNovaTarefa"
+        >
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="nomeResponsavel" class="form-label fw-bold"
+              >Nome do Usuário Responsável
+              <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="nomeResponsavel"
+              name="nome_responsavel"
+              placeholder="Digite o nome do responsável"
+              required
+            />
+            <div class="invalid-feedback">
+              O nome do responsável é obrigatório.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="tituloTarefa" class="form-label fw-bold"
+              >Título da Tarefa <span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="tituloTarefa"
+              name="titulo"
+              placeholder="Digite o título da tarefa"
+              required
+            />
+            <div class="invalid-feedback">
+              O título da tarefa é obrigatório.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="descricaoTarefa" class="form-label fw-bold"
+              >Descrição</label
+            >
+            <textarea
+              class="form-control"
+              id="descricaoTarefa"
+              name="descricao"
+              rows="4"
+              placeholder="Digite a descrição"
+            ></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn text-secondary"
+              data-bs-dismiss="modal"
+            >
+              Fechar
+            </button>
+            <button
+              type="submit"
+              class="btn btn-custom"
+              id="btnSalvar"
+              disabled
+            >
+              Salvar Tarefa
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("formNovaTarefa");
+    const btnSalvar = document.getElementById("btnSalvar");
+    const nomeResponsavel = document.getElementById("nomeResponsavel");
+    const tituloTarefa = document.getElementById("tituloTarefa");
+
+    function validarFormulario() {
+      if (
+        nomeResponsavel.value.trim() !== "" &&
+        tituloTarefa.value.trim() !== ""
+      ) {
+        btnSalvar.disabled = false;
+      } else {
+        btnSalvar.disabled = true;
+      }
+    }
+
+    nomeResponsavel.addEventListener("blur", function () {
+      if (nomeResponsavel.value.trim() === "") {
+        nomeResponsavel.classList.add("is-invalid");
+      } else {
+        nomeResponsavel.classList.remove("is-invalid");
+      }
+      validarFormulario();
+    });
+
+    tituloTarefa.addEventListener("blur", function () {
+      if (tituloTarefa.value.trim() === "") {
+        tituloTarefa.classList.add("is-invalid");
+      } else {
+        tituloTarefa.classList.remove("is-invalid");
+      }
+      validarFormulario();
+    });
+
+    nomeResponsavel.addEventListener("input", validarFormulario);
+    tituloTarefa.addEventListener("input", validarFormulario);
+
+    const modal = document.getElementById("modalNovaTarefa");
+    modal.addEventListener("hidden.bs.modal", function () {
+      form.reset();
+      nomeResponsavel.classList.remove("is-invalid");
+      tituloTarefa.classList.remove("is-invalid");
+      btnSalvar.disabled = true;
+    });
+  });
+</script>

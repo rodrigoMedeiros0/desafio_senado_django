@@ -23,7 +23,7 @@ body {
 .btn-custom:hover,
 .btn-custom:focus,
 .btn-custom:active {
-  background-color: #004a8c; 
+  background-color: #004a8c;
   border-color: #004a8c;
   color: #fff;
 }
@@ -37,7 +37,21 @@ body {
 .btn-custom-outline:hover,
 .btn-custom-outline:focus,
 .btn-custom-outline:active {
-  background-color: #005b9e; 
+  background-color: #005b9e;
   color: #fff;
   border-color: #005b9e;
+}
+
+.btn:disabled,
+.btn[disabled] {
+  background-color: #d6d6d6;
+  border: 1px solid #cccccc;
+  color: #888888;
+  cursor: not-allowed;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.text-custom {
+  color: #005b9e;
 }

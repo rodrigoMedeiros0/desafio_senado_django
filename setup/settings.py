@@ -68,8 +68,16 @@ TEMPLATES = [
     },
 ]
 
+from django.contrib.messages import constants as messages
 WSGI_APPLICATION = 'setup.wsgi.application'
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',  
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
