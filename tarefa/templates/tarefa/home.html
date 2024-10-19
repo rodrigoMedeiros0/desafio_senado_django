@@ -23,10 +23,10 @@
   </div>
 </div>
 
-{% include 'tarefa/componentes/filtro_tarefas.html'  %}
+{% include 'tarefa/componentes/filtros/filtro_tarefas.html'  %}
 
 {% if tarefas %} 
-{% include 'tarefa/componentes/tabela_tarefas.html' %}
+{% include 'tarefa/componentes/tabelas/tabela_tarefas.html' %}
 {% else %}
 <div class="text-center" style="margin-top: 100px">
   <i class="fas fa-tasks" style="font-size: 88px; color: #ccc"></i>
@@ -42,5 +42,5 @@
   </a>
 </div>
 {% endif %} 
-{% include 'tarefa/componentes/modal_nova_tarefa.html' %} 
+{% include 'tarefa/componentes/modais/modal_nova_tarefa.html' %} 
 {% endblock %}

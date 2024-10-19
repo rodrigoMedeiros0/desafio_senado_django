@@ -1,0 +1,98 @@
+{% extends 'base.html' %} {% block title %}Detalhes da Tarefa{% endblock %} {%
+block content %}
+
+<div
+  class="d-flex justify-content-between align-items-center mb-4 border-bottom"
+>
+  <h1>Detalhes da Tarefa</h1>
+  <div>
+    <button
+      type="button"
+      class="btn btn-custom me-2"
+      data-bs-toggle="modal"
+      data-bs-target="#modalNovaTarefa"
+    >
+      <i
+        class="fas fa-plus me-1"
+        style="font-size: 12px; vertical-align: middle"
+      ></i>
+      Nova Tarefa
+    </button>
+
+    <a href="{% url 'listar_tarefas' %}" class="btn btn-custom-outline">
+      Voltar
+    </a>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <form>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="idTarefa"
+            value="{{ tarefa.id }}"
+            readonly
+          />
+          <label for="idTarefa text-red">ID</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="dataCriacao"
+            value="{{ tarefa.data_criacao|date:'d/m/Y' }}"
+            readonly
+          />
+          <label for="dataCriacao">Data de Criação</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="responsavel"
+            value="{{ tarefa.nome_responsavel }}"
+            readonly
+          />
+          <label for="responsavel">Responsável</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="titulo"
+            value="{{ tarefa.titulo }}"
+            readonly
+          />
+          <label for="titulo">Título</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-floating mb-3">
+      <textarea
+        class="form-control"
+        id="descricao"
+        style="height: 150px"
+        readonly
+      >
+{{ tarefa.descricao }}</textarea
+      >
+      <label for="descricao">Descrição</label>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

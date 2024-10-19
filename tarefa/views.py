@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages 
 from .models import Tarefa
 from django.core.paginator import Paginator 
@@ -41,3 +41,9 @@ def salvar_tarefa(request):
             })
 
     return redirect('listar_tarefas')
+
+
+def detalhe_tarefa(request, id):
+    tarefa = get_object_or_404(Tarefa, id=id)
+    
+    return render(request, 'tarefa/detalhe_tarefa.html', {'tarefa': tarefa})

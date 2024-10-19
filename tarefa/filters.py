@@ -22,3 +22,4 @@ def filtrar_tarefas(request, queryset):
         queryset = queryset.filter(descricao__icontains=descricao)
 
     return queryset
+
