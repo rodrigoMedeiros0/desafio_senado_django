@@ -2,10 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages 
 from .models import Tarefa
 from django.core.paginator import Paginator 
+from .filters import filtrar_tarefas
 
 
 def listar_tarefa(request):
     tarefas_list = Tarefa.objects.all().order_by('-data_criacao')
+    tarefas_list = filtrar_tarefas(request, tarefas_list)
+    
     paginator = Paginator(tarefas_list, 10)
 
     page_number = request.GET.get('page')

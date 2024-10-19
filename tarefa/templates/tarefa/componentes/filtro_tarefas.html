@@ -1,0 +1,128 @@
+<div class="mb-3 d-flex justify-content-between gap-3">
+  <div class="d-flex gap-3">
+    <button
+      class="btn d-flex align-items-center btn-outline-secondary"
+      type="button"
+      id="btnToggleFilters"
+    >
+      Filtrar
+      <i class="fas fa-chevron-down ms-2" id="filterIcon"></i>
+    </button>
+
+    <a href="{% url 'listar_tarefas' %}" class="btn text-custom">
+      Limpar Filtros
+    </a>
+  </div>
+
+  <div class="position-relative" style="max-width: 300px">
+    <i
+      class="fas fa-search position-absolute"
+      style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa"
+    ></i>
+    <input
+      type="text"
+      class="form-control ps-5"
+      placeholder="Pesquisar tarefa"
+      style="border: 1px solid #ddd; box-shadow: none"
+      aria-label="Search"
+    />
+  </div>
+</div>
+
+<form method="GET" action="">
+  <div id="filterSection" class="d-none mt-3" style="max-width: 1200px">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="date"
+            class="form-control"
+            id="data_inicio"
+            name="data_inicio"
+            placeholder="Data Início"
+          />
+          <label for="data_inicio">Data Início</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="date"
+            class="form-control"
+            id="data_final"
+            name="data_final"
+            placeholder="Data Fim"
+          />
+          <label for="data_final">Data Fim</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="responsavel"
+            name="responsavel"
+            placeholder="Responsável"
+          />
+          <label for="responsavel">Responsável</label>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="titulo"
+            name="titulo"
+            placeholder="Título"
+          />
+          <label for="titulo">Título</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="descricao"
+            name="descricao"
+            placeholder="Descrição"
+          />
+          <label for="descricao">Descrição</label>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-custom-outline">
+          <i class="fas fa-search me-2"></i> Aplicar Filtros
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterSection = document.getElementById("filterSection");
+    const btnToggleFilters = document.getElementById("btnToggleFilters");
+    const filterIcon = document.getElementById("filterIcon");
+
+    btnToggleFilters.addEventListener("click", function () {
+      filterSection.classList.toggle("d-none");
+
+      if (filterSection.classList.contains("d-none")) {
+        filterIcon.classList.remove("fa-chevron-up");
+        filterIcon.classList.add("fa-chevron-down");
+        btnToggleFilters.classList.remove("btn-secondary");
+        btnToggleFilters.classList.add("btn-outline-secondary");
+      } else {
+        filterIcon.classList.remove("fa-chevron-down");
+        filterIcon.classList.add("fa-chevron-up");
+        btnToggleFilters.classList.remove("btn-outline-secondary");
+        btnToggleFilters.classList.add("btn-secondary");
+      }
+    });
+  });
+</script>

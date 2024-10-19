@@ -7,3 +7,31 @@
   .pagination .page-item .page-link {
     color: #005b9e; 
 }
+
+.form-floating label {
+  color: #005b9e;
+}
+
+.form-floating .form-control {
+  margin-top: 8px; 
+}
+
+
+#filterSection .form-floating .form-control {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0; 
+  box-shadow: none;
+  transition: border-color 0.3s ease-in-out;
+  padding-left: 0;
+}
+
+#filterSection .form-floating .form-control:focus {
+  border-bottom: 2px solid #005b9e; 
+  box-shadow: none;
+}
+
+.form-floating .form-control[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(50%);
+}
+
