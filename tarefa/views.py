@@ -64,3 +64,37 @@ def detalhe_tarefa(request, id):
         'tarefa': tarefa,
         'registros': registros,  
     })
+
+def salvar_registro_direto(request):
+    if request.method == 'POST':
+        tarefa_id = request.POST.get('tarefa_id')
+        horas_trabalhadas = request.POST.get('horas_trabalhadas')
+        descricao_trabalho = request.POST.get('descricao_trabalho')
+
+        try:
+            horas, minutos = horas_trabalhadas.split(':')
+            horas_decimal = int(horas) + int(minutos) / 60  
+
+            tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+            registro = RegistroTempo(
+                tarefa=tarefa,
+                horas_trabalhadas=horas_decimal,
+                descricao_trabalho=descricao_trabalho
+            )
+            registro.save()
+
+            messages.success(request, 'O registro de horas foi adicionado com sucesso!')
+            return redirect('detalhe_tarefa', id=tarefa_id)
+
+        except ValueError:
+            messages.error(request, 'Formato inválido para horas trabalhadas. Insira no formato hh:mm.')
+            return redirect('detalhe_tarefa', id=tarefa_id)
+
+        except Tarefa.DoesNotExist:
+            messages.error(request, 'A tarefa selecionada não existe.')
+            return redirect('detalhe_tarefa', id=tarefa_id)
+
+        except Exception as e:
+            messages.error(request, 'Ocorreu um erro ao salvar o registro. Tente novamente mais tarde.')
+            return redirect('detalhe_tarefa', id=tarefa_id)
+

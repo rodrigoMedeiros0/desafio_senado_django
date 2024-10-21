@@ -1,0 +1,46 @@
+<div class="modal fade" id="modalRegistroTarefa" tabindex="-1" aria-labelledby="modalRegistroTarefaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalRegistroTarefaLabel">
+            <i class="fas fa-clock me-2 text-primary"></i> Adicionar Registro de Tempo para Tarefa
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="formRegistroTarefa" method="POST" action="{% url 'salvar_registro_direto' %}">
+            {% csrf_token %}
+            
+            <!-- Exibir ID da Tarefa e Responsável como texto -->
+            <div class="mb-3">
+              <label for="tarefaId" class="form-label">ID da Tarefa</label>
+              <input type="text" class="form-control" id="tarefaId" name="tarefa_id" value="{{ tarefa.id }}" readonly>
+            </div>
+  
+            <div class="mb-3">
+              <label for="tarefaTitulo" class="form-label">Tarefa</label>
+              <input type="text" class="form-control" id="tarefaTitulo" name="tarefaTitulo" value="{{ tarefa.titulo }}" readonly>
+            </div>
+  
+            <!-- Input para Horas Trabalhadas -->
+            <div class="mb-3">
+              <label for="horasTrabalhadas" class="form-label">Horas Trabalhadas (hh:mm) <span class="text-danger">*</span></label>
+              <input type="time" class="form-control" id="horasTrabalhadas" name="horas_trabalhadas" required>
+            </div>
+  
+            <!-- Input para Descrição do Trabalho -->
+            <div class="mb-3">
+              <label for="descricaoTrabalho" class="form-label">Descrição do Trabalho <span class="text-danger">*</span></label>
+              <textarea class="form-control" id="descricaoTrabalho" name="descricao_trabalho" rows="4" required></textarea>
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-custom">Salvar Registro</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
