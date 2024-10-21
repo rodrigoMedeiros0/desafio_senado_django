@@ -6,7 +6,7 @@ from .filters import filtrar_tarefas
 from tempo_trabalho.models import RegistroTempo
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from .utils import formatar_horas
 
 def listar_tarefa(request):
     tarefas_list = Tarefa.objects.all().order_by('-data_criacao')
@@ -59,9 +59,14 @@ def salvar_tarefa(request):
 def detalhe_tarefa(request, id):
     tarefa = get_object_or_404(Tarefa, id=id)
     registros = RegistroTempo.objects.filter(tarefa=tarefa).order_by('data_registro')
+
+    total_horas_decimais = sum([registro.horas_trabalhadas for registro in registros])
+    total_horas = formatar_horas(total_horas_decimais)
+    
     return render(request, 'tarefa/detalhe_tarefa.html', {
         'tarefa': tarefa,
         'registros': registros,
+        'total_horas': total_horas,
     })
 
 
