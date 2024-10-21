@@ -12,9 +12,11 @@ Este projeto é um sistema de gerenciamento de tarefas e acompanhamento de horas
 3. [Como Rodar o Projeto](#como-rodar-o-projeto)
 4. [Tecnologias Utilizadas](#tecnologias-utilizadas)
 5. [Funcionalidades Principais](#funcionalidades-principais)
-6. [Contribuição](#contribuição)
-7. [Licença](#licença)
-8. [Contato](#contato)
+6. [Capturas de Tela](#capturas-de-tela)
+7. [Testes e Qualidade de Código](#testes-e-qualidade-de-código)
+8. [Contribuição](#contribuição)
+9. [Licença](#licença)
+10. [Contato](#contato)
 
 ## Visão Geral do Projeto
 
@@ -88,7 +90,7 @@ Este projeto foi criado utilizando o framework Django no backend e HTML/CSS/Boot
 
  ![Nova Tarefa](./setup/static/images/readme/nova-tarefa.png)
 
- ![Detalhe Tarefa](./setup/static/images/readme/detalhe-tarefa.png)
+ ![Detalhe Tarefa](./setup/static/images/readme/detalhe-tarefa.PNG)
 
  ![Histórico de Horas](./setup/static/images/readme/historico-horas.png)
 
