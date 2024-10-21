@@ -2,10 +2,10 @@
     <table class="table table-striped border mt-4">
       <thead>
         <tr>
+          <th>Data do Registro</th>
           <th>ID Tarefa</th>
           <th>Tarefa</th>
           <th>Responsável</th>
-          <th>Data do Registro</th>
           <th>Horas Trabalhadas</th>
           <th>Descrição</th>
           <th>Ações</th>
@@ -14,10 +14,10 @@
       <tbody>
         {% for registro in registros %}
         <tr>
+          <td>{{ registro.data_registro|date:"d/m/Y" }}</td>
           <td>{{ registro.tarefa.id }}</td>
           <td>{{ registro.tarefa.titulo }}</td>
           <td>{{ registro.tarefa.nome_responsavel }}</td>
-          <td>{{ registro.data_registro|date:"d/m/Y" }}</td>
           <td>{{ registro.horas_formatadas}}</td>
           <td class="text-truncate" style="max-width: 150px">{{ registro.descricao_trabalho }}</td>
           <td>

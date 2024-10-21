@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def listar_registros_tempo(request):
-    registros_list = RegistroTempo.objects.all().order_by('data_registro')
+    registros_list = RegistroTempo.objects.all().order_by('-data_registro')
     tarefas = Tarefa.objects.all()
 
     registros_list = filtrar_registros_tempo(request, registros_list)
