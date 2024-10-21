@@ -9,14 +9,13 @@ Este projeto é um sistema de gerenciamento de tarefas e acompanhamento de horas
 
 1. [Visão Geral do Projeto](#visão-geral-do-projeto)
 2. [Instalação](#instalação)
-3. [Como Rodar o Projeto](#como-rodar-o-projeto)
-4. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-5. [Funcionalidades Principais](#funcionalidades-principais)
-6. [Capturas de Tela](#capturas-de-tela)
-7. [Testes e Qualidade de Código](#testes-e-qualidade-de-código)
-8. [Contribuição](#contribuição)
-9. [Licença](#licença)
-10. [Contato](#contato)
+3. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+4. [Funcionalidades Principais](#funcionalidades-principais)
+5. [Capturas de Tela](#capturas-de-tela)
+6. [Testes e Qualidade de Código](#testes-e-qualidade-de-código)
+7. [Contribuição](#contribuição)
+8. [Licença](#licença)
+9. [Contato](#contato)
 
 ## Visão Geral do Projeto
 
