@@ -63,7 +63,7 @@
 
           <div class="mb-3">
             <label for="descricaoTarefa" class="form-label fw-bold"
-              >Descrição</label
+              >Descrição <span class="text-danger">*</span></label
             >
             <textarea
               class="form-control"
@@ -71,9 +71,10 @@
               name="descricao"
               rows="4"
               placeholder="Digite a descrição"
+              required
             ></textarea>
             <div class="invalid-feedback">
-              A descrição da tarefa é obrigatório.
+              A descrição da tarefa é obrigatória.
             </div>
           </div>
 
@@ -106,11 +107,13 @@
     const btnSalvar = document.getElementById("btnSalvar");
     const nomeResponsavel = document.getElementById("nomeResponsavel");
     const tituloTarefa = document.getElementById("tituloTarefa");
+    const descricaoTarefa = document.getElementById("descricaoTarefa");
 
     function validarFormulario() {
       if (
         nomeResponsavel.value.trim() !== "" &&
-        tituloTarefa.value.trim() !== ""
+        tituloTarefa.value.trim() !== "" &&
+        descricaoTarefa.value.trim() !== ""
       ) {
         btnSalvar.disabled = false;
       } else {
@@ -136,14 +139,25 @@
       validarFormulario();
     });
 
+    descricaoTarefa.addEventListener("blur", function () {
+      if (descricaoTarefa.value.trim() === "") {
+        descricaoTarefa.classList.add("is-invalid");
+      } else {
+        descricaoTarefa.classList.remove("is-invalid");
+      }
+      validarFormulario();
+    });
+
     nomeResponsavel.addEventListener("input", validarFormulario);
     tituloTarefa.addEventListener("input", validarFormulario);
+    descricaoTarefa.addEventListener("input", validarFormulario);
 
     const modal = document.getElementById("modalNovaTarefa");
     modal.addEventListener("hidden.bs.modal", function () {
       form.reset();
       nomeResponsavel.classList.remove("is-invalid");
       tituloTarefa.classList.remove("is-invalid");
+      descricaoTarefa.classList.remove("is-invalid");
       btnSalvar.disabled = true;
     });
   });
