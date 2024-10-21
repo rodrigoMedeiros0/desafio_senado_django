@@ -1,0 +1,89 @@
+{% extends 'base.html' %} 
+{% block title %}Detalhes do Registro de Tempo
+{% endblock %} {% block content %}
+
+<div
+  class="d-flex justify-content-between align-items-center mb-4 border-bottom"
+>
+  <h1>Detalhes do Registro de Tempo</h1>
+  <div>
+    <a href="{% url 'listar_registros' %}" class="btn btn-custom-outline">
+      Voltar
+    </a>
+  </div>
+</div>
+
+<div class="container mt-4">
+  <form>
+    <div
+      class="grid-container"
+      style="display: grid; grid-template-columns: 1fr 1fr; grid-gap: 20px"
+    >
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="idRegistro"
+          value="{{ registro.id }}"
+          readonly
+        />
+        <label for="idRegistro">ID da Tarefa</label>
+      </div>
+
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="responsavel"
+          value="{{ registro.tarefa.nome_responsavel }}"
+          readonly
+        />
+        <label for="responsavel">Responsável</label>
+      </div>
+      <div class="form-floating" style="grid-column: span 2">
+        <input
+          type="text"
+          class="form-control"
+          id="tarefaRelacionada"
+          value="{{ registro.tarefa.titulo }}"
+          readonly
+        />
+        <label for="tarefaRelacionada">Tarefa</label>
+      </div>
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="dataRegistro"
+          value="{{ registro.data_registro|date:'d/m/Y' }}"
+          readonly
+        />
+        <label for="dataRegistro">Data do Registro</label>
+      </div>
+
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="horasTrabalhadas"
+          value="{{ registro.horas_trabalhadas }} horas"
+          readonly
+        />
+        <label for="horasTrabalhadas">Horas Trabalhadas</label>
+      </div>
+      <div class="form-floating" style="grid-column: span 2">
+        <textarea
+          class="form-control"
+          id="descricaoTrabalho"
+          style="height: 150px"
+          readonly
+        >
+{{ registro.descricao_trabalho }}</textarea
+        >
+        <label for="descricaoTrabalho">Descrição do Trabalho</label>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% endblock %}

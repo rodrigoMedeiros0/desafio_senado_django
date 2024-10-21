@@ -1,0 +1,32 @@
+<div class="table-responsive mt-4">
+    <table class="table table-striped border">
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Horas Trabalhadas</th>
+          <th>Descrição</th>
+          <th>Tarefa Relacionada</th>
+          <th>Responsável</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Vamos listar os registros de tempo aqui -->
+        {% for registro in registros %}
+        <tr>
+          <td>{{ registro.data_registro|date:"d/m/Y" }}</td>
+          <td>{{ registro.horas_trabalhadas }} h</td>
+          <td class="text-truncate" style="max-width: 150px">{{ registro.descricao_trabalho }}</td>
+          <td>{{ registro.tarefa.titulo }}</td>
+          <td>{{ registro.tarefa.nome_responsavel }}</td>
+          <td>
+            <a class="btn btn-sm btn-info" href="{% url 'detalhe_registro_tempo' registro.id %}" >
+              <i class="fas fa-eye me-1"></i> Ver Detalhes
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
