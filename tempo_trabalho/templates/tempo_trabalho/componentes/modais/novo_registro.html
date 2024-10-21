@@ -1,0 +1,68 @@
+<div class="modal fade" id="modalNovoRegistro" tabindex="-1" aria-labelledby="modalNovoRegistroLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalNovoRegistroLabel">
+          <i class="fas fa-clock me-2 text-primary"></i> Novo Registro de Tempo
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formNovoRegistro" method="POST" action="{% url 'salvar_registro' %}">
+          {% csrf_token %}
+          
+          <div class="mb-3">
+            <label for="tarefaSelect" class="form-label">Escolha a Tarefa <span class="text-danger">*</span></label>
+            <select class="form-select" id="tarefaSelect" name="tarefa_id" required>
+              <option value="">Selecione o ID da Tarefa</option>
+              {% for tarefa in tarefas %}
+              <option value="{{ tarefa.id }}" data-titulo="{{ tarefa.titulo }}">{{ tarefa.id }}</option>
+              {% endfor %}
+            </select>
+          </div>
+         
+
+          <div class="mb-3">
+            <label for="tarefaTitulo" class="form-label">Título da Tarefa Selecionada</label>
+            <input type="text" class="form-control" id="tarefaTitulo" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label for="horasTrabalhadas" class="form-label">Horas Trabalhadas (hh:mm) <span class="text-danger">*</span></label>
+            <input type="time" class="form-control" id="horasTrabalhadas" name="horas_trabalhadas" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição do Trabalho <span class="text-danger">*</span></label>
+            <textarea class="form-control" id="descricao" name="descricao_trabalho" rows="4" required></textarea>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-custom" id="btnSalvarRegistro">Salvar Registro</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const tarefaSelect = document.getElementById('tarefaSelect');
+    const tarefaTitulo = document.getElementById('tarefaTitulo');
+    
+    
+    tarefaSelect.addEventListener('change', function () {
+      const selectedOption = tarefaSelect.options[tarefaSelect.selectedIndex];
+      const selectedTarefaTitulo = selectedOption.getAttribute('data-titulo');
+      if (selectedOption.value !== "") {
+        tarefaTitulo.value = selectedTarefaTitulo;
+      } else {
+        tarefaTitulo.value = "";
+      }
+    });
+  });
+</script>
+
+

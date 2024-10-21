@@ -23,7 +23,7 @@ def salvar_tarefa(request):
         titulo = request.POST.get('titulo')
         descricao = request.POST.get('descricao')
 
-        if nome_responsavel and titulo:  # Campos obrigatórios
+        if nome_responsavel and titulo and descricao:
             nova_tarefa = Tarefa(
                 nome_responsavel=nome_responsavel,
                 titulo=titulo,

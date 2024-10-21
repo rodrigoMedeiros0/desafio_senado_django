@@ -1,11 +1,55 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import RegistroTempo
+from tarefa.models import Tarefa
+from django.contrib import messages
+import logging
+
+
+logger = logging.getLogger(__name__)
+
 
 def listar_registros_tempo(request):
     registros = RegistroTempo.objects.all().order_by('data_registro')
-    return render(request, 'tempo_trabalho/home.html', {'registros': registros})
+    tarefas = Tarefa.objects.all()
+    return render(request, 'tempo_trabalho/home.html', {'registros': registros, 'tarefas': tarefas})
+
 
 def detalhe_registro_tempo(request, id):
     registro = get_object_or_404(RegistroTempo, id=id)
     return render(request, 'tempo_trabalho/detalhe_registro_tempo.html', {'registro': registro})
 
+
+def salvar_registro(request):
+    if request.method == 'POST':
+        tarefa_id = request.POST.get('tarefa_id')
+        horas_trabalhadas = request.POST.get('horas_trabalhadas')
+        descricao_trabalho = request.POST.get('descricao_trabalho')
+
+        try:
+            horas, minutos = horas_trabalhadas.split(':')
+            horas_decimal = int(horas) + int(minutos) / 60  
+
+            tarefa = get_object_or_404(Tarefa, id=tarefa_id)
+            registro = RegistroTempo(
+                tarefa=tarefa,
+                horas_trabalhadas=horas_decimal,
+                descricao_trabalho=descricao_trabalho
+            )
+            registro.save()
+
+            messages.success(request, 'O Histórico de horas trabalhadas foi salvo com sucesso!')
+            return redirect('listar_registros')
+
+        except ValueError:
+            messages.error(request, 'Formato inválido para horas trabalhadas. Por favor, insira no formato hh:mm.')
+            return redirect('listar_registros')
+
+        except Tarefa.DoesNotExist:
+            messages.error(request, 'A tarefa selecionada não existe. Por favor, tente novamente.')
+            return redirect('listar_registros')
+
+        except Exception as e:
+            logger.error(f'Erro ao salvar o registro: {str(e)}')
+
+            messages.error(request, 'Ocorreu um erro ao salvar o registro. Tente novamente mais tarde.')
+            return redirect('listar_registros')
