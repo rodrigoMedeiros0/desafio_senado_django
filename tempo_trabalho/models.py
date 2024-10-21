@@ -11,3 +11,8 @@ class RegistroTempo(models.Model):
 
     def __str__(self):
         return f"{self.tarefa.titulo} - {self.horas_trabalhadas} horas"
+
+    def horas_formatadas(self):
+        hours = int(self.horas_trabalhadas)
+        minutes = int((self.horas_trabalhadas - hours) * 60)
+        return f"{hours:02d}:{minutes:02d}"

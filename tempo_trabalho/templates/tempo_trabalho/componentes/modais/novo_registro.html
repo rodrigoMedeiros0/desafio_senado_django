@@ -11,32 +11,37 @@
         <form id="formNovoRegistro" method="POST" action="{% url 'salvar_registro' %}">
           {% csrf_token %}
           
+          <!-- Select de IDs das Tarefas -->
           <div class="mb-3">
-            <label for="tarefaSelect" class="form-label">Escolha a Tarefa <span class="text-danger">*</span></label>
+            <label for="tarefaSelect" class="form-label">Escolha o ID da Tarefa <span class="text-danger">*</span></label>
             <select class="form-select" id="tarefaSelect" name="tarefa_id" required>
               <option value="">Selecione o ID da Tarefa</option>
               {% for tarefa in tarefas %}
-              <option value="{{ tarefa.id }}" data-titulo="{{ tarefa.titulo }}">{{ tarefa.id }}</option>
+                <option value="{{ tarefa.id }}" data-titulo="{{ tarefa.titulo }}">{{ tarefa.id }}</option>
               {% endfor %}
             </select>
           </div>
-         
 
-          <div class="mb-3">
-            <label for="tarefaTitulo" class="form-label">Título da Tarefa Selecionada</label>
-            <input type="text" class="form-control" id="tarefaTitulo" readonly>
+          <div class="mb-3 d-flex gap-2">
+            <label for="tarefaTitulo" class="form-label">Título da Tarefa Selecionada: </label>
+            <p id="tarefaTituloText" class="text-custom"></p>
           </div>
+          
 
+
+          <!-- Input para Horas Trabalhadas -->
           <div class="mb-3">
             <label for="horasTrabalhadas" class="form-label">Horas Trabalhadas (hh:mm) <span class="text-danger">*</span></label>
             <input type="time" class="form-control" id="horasTrabalhadas" name="horas_trabalhadas" required>
           </div>
 
+          <!-- Input para Descrição -->
           <div class="mb-3">
             <label for="descricao" class="form-label">Descrição do Trabalho <span class="text-danger">*</span></label>
             <textarea class="form-control" id="descricao" name="descricao_trabalho" rows="4" required></textarea>
           </div>
 
+          <!-- Botão de Salvar -->
           <div class="modal-footer">
             <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-custom" id="btnSalvarRegistro">Salvar Registro</button>
@@ -50,19 +55,23 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const tarefaSelect = document.getElementById('tarefaSelect');
-    const tarefaTitulo = document.getElementById('tarefaTitulo');
-    
-    
+    const tarefaTituloText = document.getElementById('tarefaTituloText');
+  
     tarefaSelect.addEventListener('change', function () {
       const selectedOption = tarefaSelect.options[tarefaSelect.selectedIndex];
-      const selectedTarefaTitulo = selectedOption.getAttribute('data-titulo');
-      if (selectedOption.value !== "") {
-        tarefaTitulo.value = selectedTarefaTitulo;
+  
+      if (selectedOption && selectedOption.getAttribute('data-titulo')) {
+        const selectedTarefaTitulo = selectedOption.getAttribute('data-titulo');
+        console.log("Tarefa Título:", selectedOption.getAttribute('data-titulo'));
+  
+        // Atualiza o título diretamente no parágrafo
+        tarefaTituloText.textContent = selectedTarefaTitulo;
       } else {
-        tarefaTitulo.value = "";
+        tarefaTituloText.textContent = "";
       }
     });
   });
+  
+
+  
 </script>
-
-

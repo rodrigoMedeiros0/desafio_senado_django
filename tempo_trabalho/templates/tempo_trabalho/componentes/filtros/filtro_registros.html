@@ -14,19 +14,8 @@
     </a>
   </div>
 
-  <div class="position-relative" style="max-width: 300px">
-    <i
-      class="fas fa-search position-absolute"
-      style="left: 10px; top: 50%; transform: translateY(-50%); color: #aaa"
-    ></i>
-    <input
-      type="text"
-      class="form-control ps-5"
-      placeholder="Pesquisar Tarefa"
-      style="border: 1px solid #ddd; box-shadow: none"
-      aria-label="Search"
-    />
-  </div>
+  <span class="d-flex align-items-end">Número total de registros: {{ total_registros }}</span>
+
 </div>
 
 <form method="GET" action="{% url 'listar_registros' %}">

@@ -1,4 +1,5 @@
 from .models import RegistroTempo
+from django.utils import timezone
 
 
 def filtrar_registros_tempo(request, queryset):
@@ -19,9 +20,15 @@ def filtrar_registros_tempo(request, queryset):
     if data_inicio:
         queryset = queryset.filter(data_registro__gte=data_inicio)
     if data_fim:
-        queryset = queryset.filter(data_registro__lte=data_fim)
+        data_fim_completa = timezone.datetime.strptime(data_fim, "%Y-%m-%d") + timezone.timedelta(days=1)
+        queryset = queryset.filter(data_registro__lt=data_fim_completa)
     if horas_trabalhadas:
-        queryset = queryset.filter(horas_trabalhadas=horas_trabalhadas)
+        try:
+            horas, minutos = map(int, horas_trabalhadas.split(':'))
+            horas_trabalhadas_decimal = horas + (minutos / 60)
+            queryset = queryset.filter(horas_trabalhadas=horas_trabalhadas_decimal)
+        except ValueError:
+            pass
     if descricao:
         queryset = queryset.filter(descricao_trabalho__icontains=descricao)
 

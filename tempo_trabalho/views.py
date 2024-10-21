@@ -5,6 +5,7 @@ from django.contrib import messages
 import logging
 from .filters import filtrar_registros_tempo 
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 
 logger = logging.getLogger(__name__)
@@ -16,7 +17,18 @@ def listar_registros_tempo(request):
 
     registros = filtrar_registros_tempo(request, registros)
 
-    return render(request, 'tempo_trabalho/home.html', {'registros': registros, 'tarefas': tarefas})
+    paginator = Paginator(registros, 10)  # Paginação
+    page_number = request.GET.get('page')
+    registros_paginados = paginator.get_page(page_number)
+
+    total_registros = registros.count()
+
+    return render(request, 'tempo_trabalho/home.html', {
+        'registros': registros_paginados,  # Passa os registros paginados
+        'tarefas': tarefas,
+        'total_registros': total_registros
+    })
+
 
 
 def detalhe_registro_tempo(request, id):
