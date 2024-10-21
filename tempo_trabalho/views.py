@@ -12,23 +12,32 @@ logger = logging.getLogger(__name__)
 
 
 def listar_registros_tempo(request):
-    registros = RegistroTempo.objects.all().order_by('data_registro')
+    registros_list = RegistroTempo.objects.all().order_by('data_registro')
     tarefas = Tarefa.objects.all()
 
-    registros = filtrar_registros_tempo(request, registros)
+    registros_list = filtrar_registros_tempo(request, registros_list)
+    filtro_aplicado = False
 
-    paginator = Paginator(registros, 10)  # Paginação
+    if request.GET.get('tarefa_id') or request.GET.get('responsavel') or request.GET.get('data_registro_inicio') or request.GET.get('data_registro_fim') or request.GET.get('descricao'):
+        registros_list = filtrar_registros_tempo(request, registros_list)
+        filtro_aplicado = True
+
+    paginator = Paginator(registros_list, 10) 
     page_number = request.GET.get('page')
-    registros_paginados = paginator.get_page(page_number)
+    registros = paginator.get_page(page_number)
 
-    total_registros = registros.count()
+    total_registros = registros_list.count()
+
+    if filtro_aplicado and not registros_list.exists():
+        messages.warning(request, 'Nenhum registro de horas trabalhadas encontrado com os filtros aplicados.')
+        return redirect('listar_registros')
 
     return render(request, 'tempo_trabalho/home.html', {
-        'registros': registros_paginados,  # Passa os registros paginados
+        'registros': registros,  
         'tarefas': tarefas,
-        'total_registros': total_registros
+        'total_registros': total_registros,
+        'filtro_aplicado': filtro_aplicado
     })
-
 
 
 def detalhe_registro_tempo(request, id):
@@ -40,7 +49,6 @@ def detalhe_registro_tempo(request, id):
         'registro': registro,
         'horas_formatadas': horas_formatadas
     })
-
 
 def salvar_registro(request):
     if request.method == 'POST':
