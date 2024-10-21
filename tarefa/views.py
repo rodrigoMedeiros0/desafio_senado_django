@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib import messages 
+from django.contrib import messages
 from .models import Tarefa
-from django.core.paginator import Paginator 
+from django.core.paginator import Paginator
 from .filters import filtrar_tarefas
 from tempo_trabalho.models import RegistroTempo
 from django.http import HttpResponseRedirect
@@ -48,7 +48,6 @@ def salvar_tarefa(request):
             messages.success(request, 'Tarefa salva com sucesso!')
             return redirect('listar_tarefas')
         else:
-
             messages.error(request, 'Por favor, preencha todos os campos obrigatórios.')
             return render(request, 'tarefa/listar_tarefas.html', {
                 'error': 'Por favor, preencha os campos obrigatórios.'
@@ -59,11 +58,12 @@ def salvar_tarefa(request):
 
 def detalhe_tarefa(request, id):
     tarefa = get_object_or_404(Tarefa, id=id)
-    registros = RegistroTempo.objects.filter(tarefa=tarefa).order_by('data_registro') 
+    registros = RegistroTempo.objects.filter(tarefa=tarefa).order_by('data_registro')
     return render(request, 'tarefa/detalhe_tarefa.html', {
         'tarefa': tarefa,
-        'registros': registros,  
+        'registros': registros,
     })
+
 
 def salvar_registro_direto(request):
     if request.method == 'POST':
@@ -73,7 +73,7 @@ def salvar_registro_direto(request):
 
         try:
             horas, minutos = horas_trabalhadas.split(':')
-            horas_decimal = int(horas) + int(minutos) / 60  
+            horas_decimal = int(horas) + int(minutos) / 60
 
             tarefa = get_object_or_404(Tarefa, id=tarefa_id)
             registro = RegistroTempo(
@@ -94,7 +94,6 @@ def salvar_registro_direto(request):
             messages.error(request, 'A tarefa selecionada não existe.')
             return redirect('detalhe_tarefa', id=tarefa_id)
 
-        except Exception as e:
+        except Exception:
             messages.error(request, 'Ocorreu um erro ao salvar o registro. Tente novamente mais tarde.')
             return redirect('detalhe_tarefa', id=tarefa_id)
-

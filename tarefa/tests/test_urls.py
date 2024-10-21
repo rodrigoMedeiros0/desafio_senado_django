@@ -2,6 +2,7 @@ from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 from tarefa.views import listar_tarefa, salvar_tarefa, detalhe_tarefa, salvar_registro_direto
 
+
 class TarefaUrlsTest(SimpleTestCase):
 
     def test_listar_tarefas_url_resolves(self):

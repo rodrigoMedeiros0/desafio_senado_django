@@ -1,6 +1,7 @@
 from django.test import TestCase
 from tarefa.models import Tarefa
 
+
 class TarefaModelTest(TestCase):
     def test_criacao_tarefa(self):
         tarefa = Tarefa.objects.create(

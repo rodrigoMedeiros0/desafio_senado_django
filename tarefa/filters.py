@@ -1,5 +1,5 @@
-from .models import Tarefa
-from datetime import datetime, timedelta
+from datetime import datetime
+
 
 def filtrar_tarefas(request, queryset):
     data_inicio = request.GET.get('data_inicio')

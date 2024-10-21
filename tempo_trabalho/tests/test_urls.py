@@ -2,6 +2,7 @@ from django.test import SimpleTestCase
 from django.urls import reverse, resolve
 from tempo_trabalho.views import listar_registros_tempo, detalhe_registro_tempo, salvar_registro, buscar_tarefas
 
+
 class RegistroTempoURLsTest(SimpleTestCase):
 
     def test_listar_registros_url_resolves(self):

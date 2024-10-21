@@ -3,7 +3,7 @@ from .models import RegistroTempo
 from tarefa.models import Tarefa
 from django.contrib import messages
 import logging
-from .filters import filtrar_registros_tempo 
+from .filters import filtrar_registros_tempo
 from django.http import JsonResponse
 from django.core.paginator import Paginator
 
@@ -22,7 +22,7 @@ def listar_registros_tempo(request):
         registros_list = filtrar_registros_tempo(request, registros_list)
         filtro_aplicado = True
 
-    paginator = Paginator(registros_list, 10) 
+    paginator = Paginator(registros_list, 10)
     page_number = request.GET.get('page')
     registros = paginator.get_page(page_number)
 
@@ -33,7 +33,7 @@ def listar_registros_tempo(request):
         return redirect('listar_registros')
 
     return render(request, 'tempo_trabalho/home.html', {
-        'registros': registros,  
+        'registros': registros,
         'tarefas': tarefas,
         'total_registros': total_registros,
         'filtro_aplicado': filtro_aplicado
@@ -42,13 +42,14 @@ def listar_registros_tempo(request):
 
 def detalhe_registro_tempo(request, id):
     registro = get_object_or_404(RegistroTempo, id=id)
-    
+
     horas_formatadas = registro.horas_formatadas()
-    
+
     return render(request, 'tempo_trabalho/detalhe_registro_tempo.html', {
         'registro': registro,
         'horas_formatadas': horas_formatadas
     })
+
 
 def salvar_registro(request):
     if request.method == 'POST':
@@ -58,7 +59,7 @@ def salvar_registro(request):
 
         try:
             horas, minutos = horas_trabalhadas.split(':')
-            horas_decimal = int(horas) + int(minutos) / 60  
+            horas_decimal = int(horas) + int(minutos) / 60
 
             tarefa = get_object_or_404(Tarefa, id=tarefa_id)
             registro = RegistroTempo(
@@ -84,6 +85,7 @@ def salvar_registro(request):
 
             messages.error(request, 'Ocorreu um erro ao salvar o registro. Tente novamente mais tarde.')
             return redirect('listar_registros')
+
 
 def buscar_tarefas(request):
     query = request.GET.get('q', '')

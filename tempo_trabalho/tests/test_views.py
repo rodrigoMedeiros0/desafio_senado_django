@@ -2,11 +2,11 @@ from django.test import TestCase
 from django.urls import reverse
 from tempo_trabalho.models import RegistroTempo
 from tarefa.models import Tarefa
-from datetime import datetime
 from django.utils import timezone
 
+
 class RegistroTempoViewsTest(TestCase):
-    
+
     def setUp(self):
         self.tarefa = Tarefa.objects.create(
             nome_responsavel="João da Silva",
@@ -19,7 +19,7 @@ class RegistroTempoViewsTest(TestCase):
             descricao_trabalho="Descrição de teste para registro",
             data_registro=timezone.now()
         )
-    
+
     def test_listar_registros_tempo_view(self):
         response = self.client.get(reverse('listar_registros'))
         self.assertEqual(response.status_code, 200)
@@ -38,6 +38,5 @@ class RegistroTempoViewsTest(TestCase):
             'horas_trabalhadas': '2:30',
             'descricao_trabalho': 'Registro de horas de teste'
         })
-        self.assertEqual(response.status_code, 302)  
-        self.assertEqual(RegistroTempo.objects.count(), 2)  
-
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(RegistroTempo.objects.count(), 2)

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from django.contrib.messages import constants as messages  # Mover para o topo
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -69,7 +70,6 @@ TEMPLATES = [
     },
 ]
 
-from django.contrib.messages import constants as messages
 WSGI_APPLICATION = 'setup.wsgi.application'
 
 MESSAGE_TAGS = {
@@ -77,7 +77,7 @@ MESSAGE_TAGS = {
     messages.INFO: 'info',
     messages.SUCCESS: 'success',
     messages.WARNING: 'warning',
-    messages.ERROR: 'danger',  
+    messages.ERROR: 'danger',  # Espaço extra removido
 }
 
 # Database
@@ -127,6 +127,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'setup/static']
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 

@@ -2,6 +2,7 @@ from django.test import TestCase
 from tempo_trabalho.models import RegistroTempo
 from tarefa.models import Tarefa
 
+
 class RegistroTempoModelTest(TestCase):
     def setUp(self):
         self.tarefa = Tarefa.objects.create(

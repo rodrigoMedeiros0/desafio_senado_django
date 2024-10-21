@@ -1,4 +1,3 @@
-from .models import RegistroTempo
 from django.utils import timezone
 
 

@@ -3,7 +3,7 @@ from django.urls import reverse
 from tarefa.models import Tarefa
 from datetime import datetime
 from django.utils import timezone
-from datetime import datetime
+
 
 class TarefaViewsTest(TestCase):
     def setUp(self):
@@ -25,8 +25,8 @@ class TarefaViewsTest(TestCase):
             'titulo': 'Nova Tarefa',
             'descricao': 'Descrição para nova tarefa'
         })
-        self.assertEqual(response.status_code, 302)  
-        self.assertEqual(Tarefa.objects.count(), 2)  
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Tarefa.objects.count(), 2)
 
     def test_detalhe_tarefa_view(self):
         response = self.client.get(reverse('detalhe_tarefa', args=[self.tarefa.id]))
@@ -39,15 +39,15 @@ class TarefaFilterTests(TestCase):
 
     def setUp(self):
         Tarefa.objects.create(
-            nome_responsavel="João", 
-            titulo="Primeira Tarefa", 
-            descricao="Tarefa de teste", 
+            nome_responsavel="João",
+            titulo="Primeira Tarefa",
+            descricao="Tarefa de teste",
             data_criacao=timezone.make_aware(datetime(2024, 10, 1))
         )
         Tarefa.objects.create(
-            nome_responsavel="Maria", 
-            titulo="Segunda Tarefa", 
-            descricao="Outra tarefa", 
+            nome_responsavel="Maria",
+            titulo="Segunda Tarefa",
+            descricao="Outra tarefa",
             data_criacao=timezone.make_aware(datetime(2024, 10, 2))
         )
 
