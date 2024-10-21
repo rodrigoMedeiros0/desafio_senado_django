@@ -14,8 +14,7 @@ Este projeto é um sistema de gerenciamento de tarefas e acompanhamento de horas
 5. [Capturas de Tela](#capturas-de-tela)
 6. [Testes e Qualidade de Código](#testes-e-qualidade-de-código)
 7. [Contribuição](#contribuição)
-8. [Licença](#licença)
-9. [Contato](#contato)
+8. [Contato](#contato)
 
 ## Visão Geral do Projeto
 
