@@ -1,50 +1,95 @@
-<div class="modal fade" id="modalNovoRegistro" tabindex="-1" aria-labelledby="modalNovoRegistroLabel" aria-hidden="true">
+<div
+  class="modal fade"
+  id="modalNovoRegistro"
+  tabindex="-1"
+  aria-labelledby="modalNovoRegistroLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modalNovoRegistroLabel">
           <i class="fas fa-clock me-2 text-primary"></i> Novo Registro de Tempo
         </h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body">
-        <form id="formNovoRegistro" method="POST" action="{% url 'salvar_registro' %}">
+        <form
+          id="formNovoRegistro"
+          method="POST"
+          action="{% url 'salvar_registro' %}"
+        >
           {% csrf_token %}
-          
-          <!-- Select de IDs das Tarefas -->
+
           <div class="mb-3">
-            <label for="tarefaSelect" class="form-label">Escolha o ID da Tarefa <span class="text-danger">*</span></label>
-            <select class="form-select" id="tarefaSelect" name="tarefa_id" required>
+            <label for="tarefaSelect" class="form-label"
+              >Escolha o ID da Tarefa <span class="text-danger">*</span></label
+            >
+            <select
+              class="form-select"
+              id="tarefaSelect"
+              name="tarefa_id"
+              required
+            >
               <option value="">Selecione o ID da Tarefa</option>
               {% for tarefa in tarefas %}
-                <option value="{{ tarefa.id }}" data-titulo="{{ tarefa.titulo }}">{{ tarefa.id }}</option>
+              <option value="{{ tarefa.id }}" data-titulo="{{ tarefa.titulo }}">
+                {{ tarefa.id }}
+              </option>
               {% endfor %}
             </select>
           </div>
 
           <div class="mb-3 d-flex gap-2">
-            <label for="tarefaTitulo" class="form-label">Título da Tarefa Selecionada: </label>
+            <label for="tarefaTitulo" class="form-label"
+              >Título da Tarefa Selecionada:
+            </label>
             <p id="tarefaTituloText" class="text-custom"></p>
           </div>
-          
 
-
-          <!-- Input para Horas Trabalhadas -->
           <div class="mb-3">
-            <label for="horasTrabalhadas" class="form-label">Horas Trabalhadas (hh:mm) <span class="text-danger">*</span></label>
-            <input type="time" class="form-control" id="horasTrabalhadas" name="horas_trabalhadas" required>
+            <label for="horasTrabalhadas" class="form-label"
+              >Horas Trabalhadas (hh:mm)
+              <span class="text-danger">*</span></label
+            >
+            <input
+              type="time"
+              class="form-control"
+              id="horasTrabalhadas"
+              name="horas_trabalhadas"
+              required
+            />
           </div>
 
-          <!-- Input para Descrição -->
           <div class="mb-3">
-            <label for="descricao" class="form-label">Descrição do Trabalho <span class="text-danger">*</span></label>
-            <textarea class="form-control" id="descricao" name="descricao_trabalho" rows="4" required></textarea>
+            <label for="descricao" class="form-label"
+              >Descrição do Trabalho <span class="text-danger">*</span></label
+            >
+            <textarea
+              class="form-control"
+              id="descricao"
+              name="descricao_trabalho"
+              rows="4"
+              required
+            ></textarea>
           </div>
 
-          <!-- Botão de Salvar -->
           <div class="modal-footer">
-            <button type="button" class="btn text-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-custom" id="btnSalvarRegistro">Salvar Registro</button>
+            <button
+              type="button"
+              class="btn text-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-custom" id="btnSalvarRegistro">
+              Salvar Registro
+            </button>
           </div>
         </form>
       </div>
@@ -54,24 +99,27 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const tarefaSelect = document.getElementById('tarefaSelect');
-    const tarefaTituloText = document.getElementById('tarefaTituloText');
-  
-    tarefaSelect.addEventListener('change', function () {
+    const form = document.getElementById("formNovoRegistro");
+    const tarefaSelect = document.getElementById("tarefaSelect");
+    const tarefaTituloText = document.getElementById("tarefaTituloText");
+    const horasTrabalhadas = document.getElementById("horasTrabalhadas");
+    const descricao = document.getElementById("descricao");
+
+    tarefaSelect.addEventListener("change", function () {
       const selectedOption = tarefaSelect.options[tarefaSelect.selectedIndex];
-  
-      if (selectedOption && selectedOption.getAttribute('data-titulo')) {
-        const selectedTarefaTitulo = selectedOption.getAttribute('data-titulo');
-        console.log("Tarefa Título:", selectedOption.getAttribute('data-titulo'));
-  
-        // Atualiza o título diretamente no parágrafo
+
+      if (selectedOption && selectedOption.getAttribute("data-titulo")) {
+        const selectedTarefaTitulo = selectedOption.getAttribute("data-titulo");
         tarefaTituloText.textContent = selectedTarefaTitulo;
       } else {
         tarefaTituloText.textContent = "";
       }
     });
-  });
-  
 
-  
+    const modal = document.getElementById("modalNovoRegistro");
+    modal.addEventListener("hidden.bs.modal", function () {
+      form.reset();
+      tarefaTituloText.textContent = "";
+    });
+  });
 </script>

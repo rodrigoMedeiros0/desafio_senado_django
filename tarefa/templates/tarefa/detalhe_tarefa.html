@@ -83,4 +83,41 @@
   </form>
 </div>
 
+
+  <!-- Tabela de Registros de Tempo -->
+  <h2 class="mt-4">Registros de Tempo Associados</h2>
+  <div class="table-responsive">
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th class="col-2">Data de Registro</th>
+          <th class="col-2">Horas Trabalhadas</th>
+          <th class="col-6">Descrição</th>
+          <th class="col-2">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for registro in registros %}
+        <tr>
+          <td>{{ registro.data_registro|date:"d/m/Y H:i" }}</td>
+          <td>{{ registro.horas_formatadas }}</td>
+          <td class="text-truncate" style="max-width: 200px;">{{ registro.descricao_trabalho }}</td>
+          <td>
+            <a href="{% url 'detalhe_registro_tempo' registro.id %}" class="btn btn-sm btn-custom-outline">
+              Ver Detalhes
+            </a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="4" class="text-center">Nenhum registro encontrado para esta tarefa.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  
+
+
+
 {% endblock %}

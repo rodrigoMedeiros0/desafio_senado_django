@@ -33,7 +33,13 @@ def listar_registros_tempo(request):
 
 def detalhe_registro_tempo(request, id):
     registro = get_object_or_404(RegistroTempo, id=id)
-    return render(request, 'tempo_trabalho/detalhe_registro_tempo.html', {'registro': registro})
+    
+    horas_formatadas = registro.horas_formatadas()
+    
+    return render(request, 'tempo_trabalho/detalhe_registro_tempo.html', {
+        'registro': registro,
+        'horas_formatadas': horas_formatadas
+    })
 
 
 def salvar_registro(request):
