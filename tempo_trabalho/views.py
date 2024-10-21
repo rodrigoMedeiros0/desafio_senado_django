@@ -3,6 +3,8 @@ from .models import RegistroTempo
 from tarefa.models import Tarefa
 from django.contrib import messages
 import logging
+from .filters import filtrar_registros_tempo 
+from django.http import JsonResponse
 
 
 logger = logging.getLogger(__name__)
@@ -11,6 +13,9 @@ logger = logging.getLogger(__name__)
 def listar_registros_tempo(request):
     registros = RegistroTempo.objects.all().order_by('data_registro')
     tarefas = Tarefa.objects.all()
+
+    registros = filtrar_registros_tempo(request, registros)
+
     return render(request, 'tempo_trabalho/home.html', {'registros': registros, 'tarefas': tarefas})
 
 
@@ -53,3 +58,8 @@ def salvar_registro(request):
 
             messages.error(request, 'Ocorreu um erro ao salvar o registro. Tente novamente mais tarde.')
             return redirect('listar_registros')
+
+def buscar_tarefas(request):
+    query = request.GET.get('q', '')
+    tarefas = Tarefa.objects.filter(titulo__icontains=query).values('id', 'titulo')
+    return JsonResponse(list(tarefas), safe=False)

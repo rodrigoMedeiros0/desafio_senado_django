@@ -2,22 +2,24 @@
     <table class="table table-striped border mt-4">
       <thead>
         <tr>
-          <th>Data</th>
+          <th>ID Tarefa</th>
+          <th>Tarefa</th>
+          <th>Responsável</th>
+          <th>Data do Registro</th>
           <th>Horas Trabalhadas</th>
           <th>Descrição</th>
-          <th>Tarefa Relacionada</th>
-          <th>Responsável</th>
           <th>Ações</th>
         </tr>
       </thead>
       <tbody>
         {% for registro in registros %}
         <tr>
+          <td>{{ registro.tarefa.id }}</td>
+          <td>{{ registro.tarefa.titulo }}</td>
+          <td>{{ registro.tarefa.nome_responsavel }}</td>
           <td>{{ registro.data_registro|date:"d/m/Y" }}</td>
           <td>{{ registro.horas_trabalhadas }} h</td>
           <td class="text-truncate" style="max-width: 150px">{{ registro.descricao_trabalho }}</td>
-          <td>{{ registro.tarefa.titulo }}</td>
-          <td>{{ registro.tarefa.nome_responsavel }}</td>
           <td>
             <a class="btn btn-sm btn-custom-outline" href="{% url 'detalhe_registro_tempo' registro.id %}" >
               Ver Detalhes

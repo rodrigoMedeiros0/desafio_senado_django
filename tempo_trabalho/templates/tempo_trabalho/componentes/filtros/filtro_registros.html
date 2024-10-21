@@ -9,7 +9,7 @@
       <i class="fas fa-chevron-down ms-2" id="filterIcon"></i>
     </button>
 
-    <a href="{% url 'listar_tarefas' %}" class="btn text-custom">
+    <a href="{% url 'listar_registros' %}" class="btn text-custom">
       Limpar Filtros
     </a>
   </div>
@@ -22,84 +22,117 @@
     <input
       type="text"
       class="form-control ps-5"
-      placeholder="Pesquisar tarefa"
+      placeholder="Pesquisar Tarefa"
       style="border: 1px solid #ddd; box-shadow: none"
       aria-label="Search"
     />
   </div>
 </div>
 
-<div id="filterSection" class="d-none mt-3">
-  <div class="row">
-    <div class="col-md-4">
-      <div class="form-floating">
-        <input
-          type="date"
-          class="form-control"
-          id="data_inicio"
-          name="data_inicio"
-          placeholder="Data Início"
-        />
-        <label for="data_inicio">Data Início</label>
+<form method="GET" action="{% url 'listar_registros' %}">
+  <div id="filterSection" class="d-none mt-3">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select class="form-select" id="idTarefaSelect" name="tarefa_id">
+            <option value="">Selecione o ID da Tarefa</option>
+            {% for tarefa in tarefas %}
+            <option value="{{ tarefa.id }}">{{ tarefa.id }} - {{ tarefa.titulo }}</option>
+            {% endfor %}
+          </select>
+          <label for="idTarefaSelect">ID da Tarefa</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="tarefaTitulo"
+            name="tarefa_titulo"
+            placeholder="Título da Tarefa"
+          />
+          <label for="tarefaTitulo">Título da Tarefa</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="responsavel"
+            name="responsavel"
+            placeholder="Responsável"
+          />
+          <label for="responsavel">Responsável</label>
+        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-floating">
-        <input
-          type="date"
-          class="form-control"
-          id="data_final"
-          name="data_final"
-          placeholder="Data Fim"
-        />
-        <label for="data_final">Data Fim</label>
+
+    <div class="row mt-3">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="date"
+            class="form-control"
+            id="data_registro_inicio"
+            name="data_registro_inicio"
+            placeholder="Data de Início"
+          />
+          <label for="data_registro_inicio">Data de Início</label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="date"
+            class="form-control"
+            id="data_registro_fim"
+            name="data_registro_fim"
+            placeholder="Data de Fim"
+          />
+          <label for="data_registro_fim">Data de Fim</label>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input
+            type="time"
+            class="form-control"
+            id="horasTrabalhadas"
+            name="horas_trabalhadas"
+            placeholder="Horas Trabalhadas (HH:mm)"
+          />
+          <label for="horasTrabalhadas">Horas Trabalhadas (HH:mm)</label>
+        </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="responsavel"
-          name="responsavel"
-          placeholder="Responsável"
-        />
-        <label for="responsavel">Responsável</label>
+
+    <div class="row mt-3">
+      <div class="col-md-8">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="descricao"
+            name="descricao"
+            placeholder="Descrição"
+          />
+          <label for="descricao">Descrição</label>
+        </div>
+      </div>
+
+      <div class="col-md-4 d-flex align-items-end">
+        <button type="submit" class="btn btn-custom-outline">
+          <i class="fas fa-search me-2"></i> Aplicar Filtros
+        </button>
       </div>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-md-4">
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="titulo"
-          name="titulo"
-          placeholder="Título da Tarefa"
-        />
-        <label for="titulo">Título da Tarefa</label>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
-          id="descricao"
-          name="descricao"
-          placeholder="Descrição"
-        />
-        <label for="descricao">Descrição</label>
-      </div>
-    </div>
-    <div class="col-md-4 d-flex align-items-end">
-      <button type="submit" class="btn btn-custom-outline">
-        <i class="fas fa-search me-2"></i> Aplicar Filtros
-      </button>
-    </div>
-  </div>
-</div>
+</form>
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
