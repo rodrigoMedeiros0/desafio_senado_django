@@ -9,14 +9,12 @@ Este projeto é um sistema de gerenciamento de tarefas e acompanhamento de horas
 
 1. [Visão Geral do Projeto](#visão-geral-do-projeto)
 2. [Instalação](#instalação)
-3. [Como Rodar o Projeto](#como-rodar-o-projeto)
-4. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-5. [Funcionalidades Principais](#funcionalidades-principais)
-6. [Capturas de Tela](#capturas-de-tela)
-7. [Testes e Qualidade de Código](#testes-e-qualidade-de-código)
-8. [Contribuição](#contribuição)
-9. [Licença](#licença)
-10. [Contato](#contato)
+3. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+4. [Funcionalidades Principais](#funcionalidades-principais)
+5. [Capturas de Tela](#capturas-de-tela)
+6. [Testes e Qualidade de Código](#testes-e-qualidade-de-código)
+7. [Contribuição](#contribuição)
+8. [Contato](#contato)
 
 ## Visão Geral do Projeto
 
@@ -124,10 +122,6 @@ Contribuições são bem-vindas! Se você deseja contribuir para este projeto, s
    ```bash
    git push origin minha-feature
 5. Abra um Pull Request e aguarde a revisão.
-
-## Licença
-
-Este projeto é licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter mais informações.
 
 ## Contato
 
