@@ -51,7 +51,7 @@ Este projeto foi criado utilizando o framework Django no backend e HTML/CSS/Boot
     python manage.py createsuperuser
 6. (Opcional) Carregar dados fakes
     ```bash
-    python manage.py loaddata dump_db.json
+    python manage.py loaddata initial_data.json
 7. Inicie o servidor:
     ```bash
     python manage.py runserver
