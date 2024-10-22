@@ -123,10 +123,6 @@ Contribuições são bem-vindas! Se você deseja contribuir para este projeto, s
    git push origin minha-feature
 5. Abra um Pull Request e aguarde a revisão.
 
-## Licença
-
-Este projeto é licenciado sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter mais informações.
-
 ## Contato
 
 Caso tenha dúvidas ou sugestões, fique à vontade para me contatar:
